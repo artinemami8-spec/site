@@ -1,1 +1,14 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>CRAVE Final</title><link rel='stylesheet' href='style.css'></head><body><div style='background:#e63946;color:#fff;text-align:center;padding:8px;font-weight:bold'>🔥 20% OFF TODAY • Premium Delivery Experience</div><header class='top'><div class='logo'>CRAVE™</div><input id='search' placeholder='Search Pizza, Burger...'><button id='cartBtn'>Cart (<span id='count'>0</span>)</button></header><nav id='cats'></nav><main id='app'></main><aside id='cart' class='hide'></aside><script src='foods.js'></script><script src='app.js'></script></body></html>
+
+<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>CRAVE Final</title><link rel='stylesheet' href='style.css'></head><body><header class='top'><div class='logo'>CRAVE™</div><input id='search' placeholder='Search Pizza, Burger...'><button id='cartBtn'>Cart (<span id='count'>0</span>)</button></header><div id='auth' style='padding:10px'></div><nav id='cats'></nav><main id='app'></main><aside id='cart' class='hide'></aside><script src='foods.js'></script><script src='app.js'></script>
+<script async crossorigin="anonymous"
+data-clerk-publishable-key="pk_test_cHJlbWl1bS1iZWV0bGUtMzguY2xlcmsuYWNjb3VudHMuZGV2JA"
+src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@4/dist/clerk.browser.js"></script>
+<script>
+window.addEventListener("load", async () => {
+  try {
+    await Clerk.load();
+    const a=document.getElementById('auth'); if(Clerk.user){a.innerHTML=`<button onclick="Clerk.signOut()">Sign Out</button>`;} else {a.innerHTML=`<button onclick="Clerk.openSignIn()">Sign In</button>`;}
+  } catch(e){console.log(e)}
+});
+</script>
+</body></html>
