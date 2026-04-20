@@ -1,16 +1,15 @@
-
-}
-</script>
 <!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
 <link rel='stylesheet' href='style.css'><title>Admin</title></head><body>
-<div class='detail'><h1>Admin Panel</h1><a href='index.html'>⬅ Back Site</a>
+<script>if(prompt('Admin Password')!=='admin123'){document.write('Access Denied');throw new Error('denied')}</script>
+<div class='detail'><h1>Admin Panel</h1><a href='index.html'>⬅ Back Site</a> <button onclick="location.href='index.html'">Logout</button>
 <p>Manage menu items locally.</p>
 <input id='n' placeholder='Food Name'><input id='p' placeholder='Price'><input id='c' placeholder='Category'><input id='i' placeholder='Image URL'>
 <button onclick='addFood()'>Add Food</button><div id='rows'></div></div>
 <script src='foods.js'></script>
 <script>
+let data=JSON.parse(localStorage.getItem('foods')||'null'); if(data) foods.splice(0,foods.length,...data);
 function save(){localStorage.foods=JSON.stringify(foods)}
-function draw(){rows.innerHTML=foods.map((f,x)=>`<div class=row><div>${f.name} - $${f.price}</div><button onclick="delFood(${x})">Delete</button></div>`).join('')}
+function draw(){rows.innerHTML=foods.map((f,x)=>`<div class=row style='display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap'><div>${f.name} - $${f.price}</div><button onclick="delFood(${x})">Delete</button></div>`).join('')}
 function addFood(){foods.push({id:Date.now(),name:n.value,cat:c.value||'New',price:+p.value||10,img:i.value||foods[0].img,desc:'New item'});save();draw()}
 function delFood(x){foods.splice(x,1);save();draw()}
 draw()
